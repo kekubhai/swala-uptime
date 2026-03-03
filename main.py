@@ -1,7 +1,7 @@
 import os
 from sarvamai import SarvamAI
 from dotenv import load_dotenv
-
+import base64
 # Load variables from .env file
 load_dotenv()
 
@@ -9,19 +9,19 @@ load_dotenv()
 client = SarvamAI(
     api_subscription_key=os.getenv("YOUR_API_SUBSCRIPTION_KEY"),
 )
+# Text to convert to speech
 
-response = client.speech_to_text_translate_streaming(
-    text="""नमस्ते! Sarvam AI में आपका स्वागत है।
-
-हम भारतीय भाषाओं के लिए अत्याधुनिक voice technology बनाते हैं। हमारे text-to-speech models प्राकृतिक और इंसान जैसी आवाज़ें produce करते हैं, जो बेहद realistic लगती हैं।
-
-आप अपना text type कर सकते हैं या different voices को try करने के लिए किसी भी voice card पर play button पर click कर सकते हैं। तो चलिए, अपनी भाषा में AI की ताकत experience करें!""",
+response = client.text_to_speech.convert(
+    text="नमस्ते, आप कैसे हैं?",
     target_language_code="hi-IN",
-    speaker="manan",
-    pace=1.1,
-    speech_sample_rate=22050,
-    enable_preprocessing=True,
+    speaker="shubh",
     model="bulbul:v3"
 )
 
-print(response)
+# The response object contains a list of base64 strings in the 'audios' attribute
+audio_base64 = response.audios[0] 
+
+# Decode and save to file
+with open("output.wav", "wb") as f:
+    f.write(base64.b64decode(audio_base64))
+
