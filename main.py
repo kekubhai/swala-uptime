@@ -2,6 +2,8 @@ import os
 from sarvamai import SarvamAI
 from dotenv import load_dotenv
 import base64
+
+from test_provider import text_provider
 # Load variables from .env file
 load_dotenv()
 
@@ -12,7 +14,7 @@ client = SarvamAI(
 # Text to convert to speech
 
 response = client.text_to_speech.convert(
-    text="नमस्ते, आप कैसे हैं?",
+    text=text_provider(),
     target_language_code="hi-IN",
     speaker="shubh",
     model="bulbul:v3"
