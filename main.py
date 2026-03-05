@@ -16,15 +16,13 @@ client = SarvamAI(
 
 response = client.text_to_speech.convert(
     text=text_provider(),
-    target_language_code="hi-IN",
+    target_language_code="bn-IN",
     speaker="shubh",
     model="bulbul:v3"
 )
 
 # The response object contains a list of base64 strings in the 'audios' attribute
 audio_base64 = response.audios[0] 
-
-# Decode and save to file
-with open("output.wav", "wb") as f:
+with open("sarvamvoices/output.mp3", "wb") as f:
     f.write(base64.b64decode(audio_base64))
 

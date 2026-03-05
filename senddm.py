@@ -17,6 +17,7 @@ if not client.is_user_authorized():
 try:
     me = client.get_entity('me')  # Replace with the username or user ID of the recipient
     client.send_message(me, "Hello from Python!", parse_mode='html')
+    client.send_file(me, 'my_audio.mp3', caption="Here's an audio file for you!")
     print("Message sent!")
 except Exception as e:
     print("Error:", e)
