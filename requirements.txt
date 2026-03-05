@@ -1,1 +1,4 @@
 sarvamai
+voice-cloning
+librosa
+soundfile
