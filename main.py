@@ -2,7 +2,7 @@ import os
 from sarvamai import SarvamAI
 from dotenv import load_dotenv
 import base64
-
+from dailytextgeneration import generate_message, datetime
 from test_provider import text_provider
 # Load variables from .env file
 load_dotenv()
@@ -15,7 +15,7 @@ client = SarvamAI(
 # Text to convert to speech
 
 response = client.text_to_speech.convert(
-    text=text_provider(),
+    text=generate_message(datetime.now().hour, "positive and loving"),
     target_language_code="bn-IN",
     speaker="shubh",
     model="bulbul:v3"

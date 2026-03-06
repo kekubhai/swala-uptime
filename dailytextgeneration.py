@@ -55,3 +55,4 @@ if __name__ == "__main__":
 
     message = generate_message(time_of_day, MOOD)
     print(f"💬 Generated Message:\n\n{message}")
+    
