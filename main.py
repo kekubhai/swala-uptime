@@ -3,8 +3,7 @@ from sarvamai import SarvamAI
 from dotenv import load_dotenv
 import base64
 from dailytextgeneration import generate_message, datetime
-from test_provider import text_provider
-# Load variables from .env file
+
 load_dotenv()
 
 
@@ -23,6 +22,6 @@ response = client.text_to_speech.convert(
 
 # The response object contains a list of base64 strings in the 'audios' attribute
 audio_base64 = response.audios[0] 
-with open("sarvamvoices/output.mp3", "wb") as f:
+with open(f"sarvamvoices/output{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.mp3", "wb") as f:
     f.write(base64.b64decode(audio_base64))
 

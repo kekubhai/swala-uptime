@@ -2,3 +2,5 @@ sarvamai
 voice-cloning
 librosa
 soundfile
+python-dotenv
+elevenlabs
