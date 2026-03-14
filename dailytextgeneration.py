@@ -2,6 +2,7 @@ import os
 import datetime
 from groq import Groq
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -16,9 +17,13 @@ def get_time_of_day():
     else:
         return "night"
 
-MOOD="positive and loving"  # You can change this to "playful", "thoughtful", etc. to vary the tone of the message
-def generate_message(time_of_day, mood):
-      # ✅ correct
+MOOD = "positive and loving"  # You can change this to vary the tone of the message.
+
+
+def generate_message(time_of_day=None, mood=MOOD):
+    if time_of_day is None:
+        time_of_day = get_time_of_day()
+
     client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
     chat_completion = client.chat.completions.create(

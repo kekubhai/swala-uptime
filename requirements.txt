@@ -4,3 +4,4 @@ librosa
 soundfile
 python-dotenv
 elevenlabs
+apscheduler

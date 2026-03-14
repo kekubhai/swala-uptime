@@ -4,24 +4,30 @@ import os
 import datetime
 
 load_dotenv()
-from dailytextgeneration import generate_message
 
 elevenlabs = ElevenLabs(api_key=os.getenv("ELEVENLABS_API_KEY"))
 
-def generate_and_save_audio() -> str:
-    text = generate_message(datetime.datetime.now().hour, "positive and loving")
 
+def text_to_voice(text: str) -> str:
     audio = elevenlabs.text_to_speech.convert(
-        text=text, 
+        text=text,
         voice_id="ViGox7moQtO0AJtyWAqT",
         model_id="eleven_multilingual_v2",
         output_format="mp3_44100_128",
     )
 
-    filename = f"elevenlabsvoices/output{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.mp3"
+    output_dir = "elevenlabsvoices"
+    os.makedirs(output_dir, exist_ok=True)
+    filename = f"{output_dir}/output{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.mp3"
 
     with open(filename, "wb") as f:
         for chunk in audio:
             f.write(chunk)
 
-    return filename  # ← return the path, not the generator
+    return filename
+
+def generate_and_save_audio() -> str:
+    from dailytextgeneration import generate_message
+
+    text = generate_message()
+    return text_to_voice(text)
