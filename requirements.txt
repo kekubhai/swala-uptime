@@ -4,3 +4,5 @@ soundfile
 python-dotenv
 elevenlabs
 apscheduler
+fastapi
+uvicorn
