@@ -20,7 +20,7 @@ def send_voice(audio_path: str):
             client.sign_in(phone, input("Enter OTP: "))
 
         client.send_file(
-            "me",
+            recipient,
             audio_path,
             voice_note=True,
             caption="🌸 আজকের বার্তা"
